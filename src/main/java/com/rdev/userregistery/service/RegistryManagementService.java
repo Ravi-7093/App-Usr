@@ -170,39 +170,6 @@ public class RegistryManagementService {
 
     }
 
-    //Update User By Id
-    public ReqResp UpdateUser(Integer id, RegistryUsers updatedUser){
-        ReqResp resp = new ReqResp();
-        try{
-            Optional<RegistryUsers> usroptional = registryRepo.findById(id);
-            RegistryUsers existingUser = usroptional.get();
-            if(usroptional.isPresent()) {
-                existingUser.setEmail(updatedUser.getEmail());
-                existingUser.setName(updatedUser.getName());
-                existingUser.setCity(updatedUser.getCity());
-                existingUser.setRole(updatedUser.getRole());
-
-
-                if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
-                    existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
-                }
-                registryRepo.save(existingUser);
-                resp.setRegistryUsers(existingUser);
-                resp.setStatusCode(200);
-                resp.setMessage("User updated successfully");
-            }
-            else{
-                resp.setStatusCode(404);
-                resp.setMessage("User not found for update");
-            }
-        }
-        catch (Exception e){
-            resp.setStatusCode(500);
-            resp.setMessage("Error occurred while deleting user: " + e.getMessage());
-        }
-        return resp;
-
-    }
 
     //Retrive user Info
     public ReqResp getMyInfo(String email){

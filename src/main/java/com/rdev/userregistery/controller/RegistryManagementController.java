@@ -47,11 +47,7 @@ public class RegistryManagementController {
             return ResponseEntity.ok(registryManagementService.getUserById(userId));
 
         }
-    // Endpoint to update a user by ID (admin only)
-       @PutMapping("/admin/update/{userId}")
-        public ResponseEntity<ReqResp> updateUser(@PathVariable Integer userId, @RequestBody RegistryUsers reqres){
-            return ResponseEntity.ok(registryManagementService.UpdateUser(userId, reqres));
-        }
+    
 
     // Endpoint to get the authenticated user's profile
         @GetMapping("/adminuser/get-profile")
